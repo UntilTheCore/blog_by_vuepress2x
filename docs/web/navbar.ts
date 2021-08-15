@@ -8,15 +8,15 @@ const nav: NavbarGroup = {
       children: [
         {
           text: "Vue2",
-          link: "/web/vue/vue2"
+          link: "/web/vue/vue2/"
         },
         {
           text: "Vue3",
-          link: "/web/vue/vue3"
+          link: "/web/vue/vue3/"
         },
         {
-          text: "Vuepress2x",
-          link: "/web/vue/vuepress2x"
+          text: "Vuepress",
+          link: "/web/vue/vuepress/"
         },
       ]
     },
@@ -25,11 +25,11 @@ const nav: NavbarGroup = {
       children: [
         {
           text: "antd",
-          link: "/web/react"
+          link: "/web/react/"
         },
         {
           text: "dva",
-          link: "/web/react"
+          link: "/web/react/"
         },
       ]
     },

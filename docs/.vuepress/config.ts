@@ -1,17 +1,29 @@
 import {defineUserConfig} from "vuepress";
 import type {DefaultThemeOptions} from "vuepress";
-import sidebar from "./sidebar";
-import navbar from './navbar';
+// import sidebar from './sidebar'
+import navbar from "./navbar";
+
+const sidebarConf = require("./sidebar");
 
 export default defineUserConfig<DefaultThemeOptions>({
   lang: "zh-CN",
   title: "untilthecore's blog",
   description: "欢迎访问 untilthecore 的个人博客",
+  plugins: [
+    ["vuepress-plugin-auto-sidebar", {
+      collapse: {
+        open: true
+      }
+    }]
+  ],
 
   themeConfig: {
     navbar,
-    sidebar,
-    lastUpdatedText: "有新内容",
+    sidebar: sidebarConf,
+    lastUpdatedText: "最近更新",
     backToHome: "返回首页",
+    tip: "提示",
+    warning: "注意",
+    danger: "警告",
   },
 });
