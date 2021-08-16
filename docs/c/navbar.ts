@@ -1,8 +1,17 @@
-import type {NavbarItem } from "@vuepress/theme-default";
+import type {NavbarGroup} from "@vuepress/theme-default";
 
-const nav: NavbarItem = {
+const nav: NavbarGroup = {
   text: "C/C++",
-  link: '/c'
+  children: [
+    {
+      text: "C",
+      link: '/c/c/'
+    },
+    {
+      text: "C++",
+      link: '/c/cplus/'
+    },
+  ]
 };
 
 export default nav;

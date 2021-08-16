@@ -1,6 +1,5 @@
 import {defineUserConfig} from "vuepress";
 import type {DefaultThemeOptions} from "vuepress";
-// import sidebar from './sidebar'
 import navbar from "./navbar";
 
 const sidebarConf = require("./sidebar");

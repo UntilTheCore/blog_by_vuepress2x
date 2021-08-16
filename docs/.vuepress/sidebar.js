@@ -54,7 +54,7 @@ module.exports = {
       "collapsable": true,
       "sidebarDepth": 1,
       "children": [
-        "firstcplus.md"
+        "README.md"
       ]
     }
   ],
@@ -70,17 +70,6 @@ module.exports = {
     }
   ],
   "/c/c/": [
-    {
-      "text": "C",
-      "title": "C",
-      "collapsable": true,
-      "sidebarDepth": 1,
-      "children": [
-        "firstc.md"
-      ]
-    }
-  ],
-  "/c/": [
     {
       "text": "C",
       "title": "C",
