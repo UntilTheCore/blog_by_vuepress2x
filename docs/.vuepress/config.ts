@@ -9,6 +9,9 @@ export default defineUserConfig<DefaultThemeOptions>({
   lang: "zh-CN",
   title: "untilthecore's blog",
   description: "欢迎访问 untilthecore 的个人博客",
+  head: [
+    ["link", {rel: "icon", href: "/images/favicon.ico"}],
+  ],
   plugins: [
     ["vuepress-plugin-auto-sidebar", {
       collapse: {
