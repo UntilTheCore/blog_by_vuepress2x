@@ -76,7 +76,8 @@ module.exports = {
       "collapsable": true,
       "sidebarDepth": 1,
       "children": [
-        "README.md"
+        "README.md",
+        "字符串拷贝"
       ]
     }
   ]
