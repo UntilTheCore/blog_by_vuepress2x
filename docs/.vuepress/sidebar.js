@@ -1,4 +1,15 @@
 module.exports = {
+  "/project/fingertipsBook(react)/": [
+    {
+      "text": "fingertipsBook(react)",
+      "title": "fingertipsBook(react)",
+      "collapsable": true,
+      "sidebarDepth": 1,
+      "children": [
+        "README.md"
+      ]
+    }
+  ],
   "/web/vue/vuepress/": [
     {
       "text": "Vuepress",
