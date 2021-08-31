@@ -6,7 +6,8 @@ module.exports = {
       "collapsable": true,
       "sidebarDepth": 1,
       "children": [
-        "README.md"
+        "README.md",
+        "初始化.md"
       ]
     }
   ],

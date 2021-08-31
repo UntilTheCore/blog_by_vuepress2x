@@ -5,7 +5,7 @@ const nav: NavbarGroup = {
   children: [
     {
       text: "指尖账本(React)",
-      link: '/project/fingertipsBook(react)'
+      link: '/project/fingertipsBook(react)/'
     },
   ]
 };
