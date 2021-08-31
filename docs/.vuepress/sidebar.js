@@ -77,7 +77,7 @@ module.exports = {
       "sidebarDepth": 1,
       "children": [
         "README.md",
-        "字符串拷贝"
+        "字符串拷贝.md"
       ]
     }
   ]
