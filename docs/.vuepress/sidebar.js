@@ -7,7 +7,8 @@ module.exports = {
       "sidebarDepth": 1,
       "children": [
         "README.md",
-        "初始化.md"
+        "初始化.md",
+        "知识点.md"
       ]
     }
   ],
