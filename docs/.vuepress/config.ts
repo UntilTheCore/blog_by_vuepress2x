@@ -11,13 +11,6 @@ export default defineUserConfig<DefaultThemeOptions>({
   head: [
     ["link", {rel: "icon", href: "/images/favicon.ico"}],
   ],
-  plugins: [
-    ["vuepress-plugin-auto-sidebar", {
-      collapse: {
-        open: true
-      }
-    }]
-  ],
 
   themeConfig: {
     navbar,

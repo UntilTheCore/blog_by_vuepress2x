@@ -1,97 +1,106 @@
 module.exports = {
-  "/project/fingertipsBook(react)/": [
+  '/project/fingertipsBook(react)/': [
     {
-      "text": "fingertipsBook(react)",
-      "title": "fingertipsBook(react)",
-      "collapsable": true,
-      "sidebarDepth": 1,
-      "children": [
-        "README.md",
-        "初始化.md",
-        "知识点.md"
+      'text': 'fingertipsBook(react)',
+      'title': 'fingertipsBook(react)',
+      'collapsable': true,
+      'sidebarDepth': 2,
+      'children': [
+        '/project/fingertipsBook(react)/README.md',
+        '/project/fingertipsBook(react)/初始化.md',
+        {
+          text: '知识点',
+          title: '知识点',
+          collapsable: true,
+          'sidebarDepth': 2,
+          children: [
+            '/project/fingertipsBook(react)/知识点/TreeShaking.md',
+            '/project/fingertipsBook(react)/知识点/SVG.md',
+          ]
+        }
+      ]
+    },
+  ],
+  '/web/vue/vuepress/': [
+    {
+      'text': 'Vuepress',
+      'title': 'Vuepress',
+      'collapsable': true,
+      'sidebarDepth': 2,
+      'children': [
+        'README.md',
+        '基础入门.md',
+        '进阶提高.md'
       ]
     }
   ],
-  "/web/vue/vuepress/": [
+  '/web/vue/vue2/': [
     {
-      "text": "Vuepress",
-      "title": "Vuepress",
-      "collapsable": true,
-      "sidebarDepth": 1,
-      "children": [
-        "README.md",
-        "基础入门.md",
-        "进阶提高.md"
+      'text': 'Vue2',
+      'title': 'Vue2',
+      'collapsable': true,
+      'sidebarDepth': 2,
+      'children': [
+        'README.md',
+        'vue2.md'
       ]
     }
   ],
-  "/web/vue/vue2/": [
+  '/web/vue/vue3/': [
     {
-      "text": "Vue2",
-      "title": "Vue2",
-      "collapsable": true,
-      "sidebarDepth": 1,
-      "children": [
-        "README.md",
-        "vue2.md"
+      'text': 'Vue3',
+      'title': 'Vue3',
+      'collapsable': true,
+      'sidebarDepth': 2,
+      'children': [
+        'README.md',
+        'vue3.md'
       ]
     }
   ],
-  "/web/vue/vue3/": [
+  '/web/react/': [
     {
-      "text": "Vue3",
-      "title": "Vue3",
-      "collapsable": true,
-      "sidebarDepth": 1,
-      "children": [
-        "README.md",
-        "vue3.md"
+      'text': 'React',
+      'title': 'React',
+      'collapsable': true,
+      'sidebarDepth': 2,
+      'children': [
+        'antd.md'
       ]
     }
   ],
-  "/web/react/": [
+  '/c/cplus/': [
     {
-      "text": "React",
-      "title": "React",
-      "collapsable": true,
-      "sidebarDepth": 1,
-      "children": [
-        "antd.md"
+      'text': 'Cplus',
+      'title': 'Cplus',
+      'collapsable': true,
+      'sidebarDepth': 2,
+      'children': [
+        'README.md'
       ]
     }
   ],
-  "/c/cplus/": [
+  '/home/': [
     {
-      "text": "Cplus",
-      "title": "Cplus",
-      "collapsable": true,
-      "sidebarDepth": 1,
-      "children": [
-        "README.md"
+      'text': 'Home',
+      'title': 'Home',
+      'collapsable': true,
+      'sidebarDepth': 2,
+      'children': [
+        'README.md'
       ]
     }
   ],
-  "/home/": [
+  '/c/c/': [
     {
-      "text": "Home",
-      "title": "Home",
-      "collapsable": true,
-      "sidebarDepth": 1,
-      "children": [
-        "README.md"
-      ]
-    }
-  ],
-  "/c/c/": [
-    {
-      "text": "C",
-      "title": "C",
-      "collapsable": true,
-      "sidebarDepth": 1,
-      "children": [
-        "README.md",
-        "字符串拷贝.md"
+      'text': 'C',
+      'title': 'C',
+      'collapsable': true,
+      'sidebarDepth': 2,
+      'children': [
+        'README.md',
+        '字符串拷贝.md'
       ]
     }
   ]
-};
+}
