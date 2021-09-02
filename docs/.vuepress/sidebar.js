@@ -14,6 +14,8 @@ module.exports = {
           collapsable: true,
           'sidebarDepth': 2,
           children: [
+            '/project/fingertipsBook(react)/知识点/JavaScript.md',
+            '/project/fingertipsBook(react)/知识点/TypeScript.md',
             '/project/fingertipsBook(react)/知识点/TreeShaking.md',
             '/project/fingertipsBook(react)/知识点/SVG.md',
             '/project/fingertipsBook(react)/知识点/受控组件和非受控组件.md',
