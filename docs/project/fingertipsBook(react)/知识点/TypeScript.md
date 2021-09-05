@@ -140,3 +140,47 @@ TopBar.defaultProps = {
 
 export default TopBar;
 ```
+
+## props类型增强
+
+当我们需要封装(增强)出一个原生HTML元素时，相应的，也需要对新组件的Props进行扩充。比如对一个`<input />`元素进行封装，在左侧给它增加一个`lable`，内容由外部通过`props`提供。此时会定义Props的类型：
+
+```tsx
+type Props = {
+  labelName: string
+}
+```
+
+但这样原生`input`的属性怎么办？那么多总不可能一个个自己写吧？这个时候ts的类型增强就非常好地帮我们解决这个问题，操作符是`&`。它可以将多个类型合并为到一个类型中，官方称为[交叉类型](https://www.tslang.cn/docs/handbook/advanced-types.html)
+
+```tsx
+// 将input的属性合并到Props中
+type Props = {
+  title: string,
+} & React.InputHTMLAttributes<HTMLInputElement>;
+```
+
+经过增加后的props，需要先将自己所需的属性单独提取出来，然后用ES6提供的析构语法和[扩展运算符](https://es6.ruanyifeng.com/#docs/object#%E6%89%A9%E5%B1%95%E8%BF%90%E7%AE%97%E7%AC%A6)`...`将剩余属性放入`input`中，这样就能大大减少对`input`属性编写了！
+
+```tsx {8,14}
+// 增强<Input />组件，非完成代码
+type Props = {
+  title: string,
+} & React.InputHTMLAttributes<HTMLInputElement>;
+
+const Input: React.FC<Props> = (props) => {
+  // 将自己会用到属性单独提取出来,剩余的放入rest
+  const { title, children, ...rest } = props;
+  return (
+    <InputWrapper>
+      <label>
+        <span>{props.title}</span>
+        {/* 将剩余参数展开 */}
+        <input type="text" {...rest} />
+      </label>
+    </InputWrapper>
+  );
+};
+
+export default Input;
+```
