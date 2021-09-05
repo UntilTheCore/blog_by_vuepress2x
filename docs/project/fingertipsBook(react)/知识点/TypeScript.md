@@ -1,4 +1,4 @@
-# TypeScript
+# React & TypeScript
 
 ## 从对象中获取键组成的类型
 
@@ -107,4 +107,36 @@ const useTags = () => {
 };
 
 export { useTags };
+```
+
+## props设置默认值
+
+封装的组件我们想给它一个默认的行为，那就需要给`props`设置一个默认值，比如一个`<TopBar />`组件，它左上角的返回按钮应该是默认拥有返回按钮的。通过设置组件的`defaultProps`对象即可控制其相关默认行为：
+
+```tsx {21-23}
+// <TopBar />非完成代码
+type Props = {
+  /** topbar的名称 */
+  title: string,
+  /** 是否启用返回按钮 */
+  back?: boolean,
+}
+
+const TopBar: React.FC<Props> = (props) => {
+  return (
+    <div>
+      {
+        props.back && <Icon name="left" />
+      }
+      <span>{props.title}</span>
+    </div>
+  );
+}
+
+// 设置组件的默认props
+TopBar.defaultProps = {
+  back: true,
+}
+
+export default TopBar;
 ```
