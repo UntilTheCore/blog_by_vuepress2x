@@ -72,7 +72,7 @@ type b = {
 import { useState } from "react";
 import React from "react";
 
-// 手动返回值类型编写
+// 手动返回值类型编写。这种在写在中括号内的像数组一样但按位置存不同类型的类型，称为元组
 const useTags = (): [string[], React.Dispatch<React.SetStateAction<string[]>>] => {
   const [tags, setTags] = useState<string[]>(["衣", "食", "住", "行"]);
   return [tags, setTags];
@@ -91,7 +91,7 @@ type t = (string[] | React.Dispatch<React.SetStateAction<string[]>>)[];
 
 我们的目的是既让ts能正确推测类型，又不用自己手动编写返回值类型！为了达到这样的目的，即将值使用对象包裹后返回！这样ts就知道对象中有哪些数据和哪些类型了。
 
-```tsx {6}
+```tsx {6-11}
 import { useState } from "react";
 import React from "react";
 
@@ -108,5 +108,3 @@ const useTags = () => {
 
 export { useTags };
 ```
-
-
