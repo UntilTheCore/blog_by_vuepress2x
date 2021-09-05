@@ -1,5 +1,11 @@
 # React & TypeScript
 
+## 控制台出现两次log
+
+项目运行时，改变state想通过`console.log`看看数据是否正确但发现打印了两次（组件渲染了两次）。这是React有意为之的，目的是期望能帮助开发者发现可能的bug！致使出现这个情况的原因是在代码中开启了[严格模式](https://zh-hans.reactjs.org/docs/strict-mode.html#detecting-unexpected-side-effects)，而且通过`cra`创建的项目是在`<App />`根节点上开启的，等于自己所有的代码会被应用严格模式。
+
+注：严格模式(Strict Mode)只会在开发环境下生效！
+
 ## 从对象中获取键组成的类型
 
 `typeof` 可获取对象的类型，`keyof`可将类型中的键拿出来再作为一个新的类型。
