@@ -77,3 +77,26 @@ const Label: React.FC = () => {
   let {id} = useParams<Params>();
 };
 ```
+
+## 编程式路由
+
+通过[useHistory](https://reactrouter.com/web/api/Hooks/usehistory)函数可以获取编程式路由对象，通过其返回的对象，可以调用相关函数进行路由的前进和后退。
+
+```tsx {5,8}
+// 官方案例
+import { useHistory } from "react-router-dom";
+
+function HomeButton() {
+  let history = useHistory();
+
+  function handleClick() {
+    history.push("/home");
+  }
+
+  return (
+    <button type="button" onClick={handleClick}>
+      Go home
+    </button>
+  );
+}
+```
