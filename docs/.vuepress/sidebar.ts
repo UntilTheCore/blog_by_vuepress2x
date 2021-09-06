@@ -7,6 +7,7 @@ import reactSideBar from '../web/react/sideBar'
 import cSideBar from '../c/c/sideBar'
 import cplusSideBar from '../c/cplus/sideBar'
 import homeSideBar from '../home/sideBar'
+import ideSideBar from '../ide/sidebar'
 
 const sideBar: SidebarConfig = {
   '/project/fingertipsBook(react)/': projectSideBar,
@@ -16,6 +17,7 @@ const sideBar: SidebarConfig = {
   '/web/react/': reactSideBar,
   '/c/c/': cSideBar,
   '/c/cplus/': cplusSideBar,
+  '/ide/': ideSideBar,
   '/home/': homeSideBar,
 }
 
