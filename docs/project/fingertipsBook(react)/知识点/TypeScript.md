@@ -190,3 +190,32 @@ const Input: React.FC<Props> = (props) => {
 
 export default Input;
 ```
+
+## 类名合并
+
+在vue中，通过`v-bind`绑定的`class`可以和默认的`class`自动实现合并。但在React中，没有这样的操作，我们可以自己手动通过外部是否传入了`className`来判断是否需要进行`className`的合并:
+
+```tsx
+// 非完成代码
+const myComponent = (props) => {
+  return (
+    <div className={'name1' + props.className ? props.className : ''} >Hi</div>
+  );
+}
+```
+
+如果要添加多个类名怎么办？这看起来有点不太友好！此时可以使用[classnames](https://www.npmjs.com/package/classnames)来帮助我们进行类名的合并：
+
+:::tip
+新的classnames已支持类型提示，如果在引入时发现有错误，可以安装一下`@types/classname`增强类型提示能力。
+:::
+
+```tsx
+import cs from 'classnames';
+// 非完成代码
+const myComponent = (props) => {
+  return (
+    <div className={cs('name1','name2')} >Hi</div>
+  );
+}
+```
