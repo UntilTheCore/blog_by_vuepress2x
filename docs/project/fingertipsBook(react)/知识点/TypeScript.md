@@ -207,7 +207,7 @@ const myComponent = (props) => {
 如果要添加多个类名怎么办？这看起来有点不太友好！此时可以使用[classnames](https://www.npmjs.com/package/classnames)来帮助我们进行类名的合并：
 
 :::tip
-新的classnames已支持类型提示，如果在引入时发现有错误，可以安装一下`@types/classname`增强类型提示能力。
+新的classnames已支持类型提示，如果在引入时发现IDE提示有错误，可以安装一下`@types/classnames`增强类型提示能力。
 :::
 
 ```tsx
