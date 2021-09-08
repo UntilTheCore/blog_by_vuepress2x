@@ -66,6 +66,40 @@ type b = {
 }
 ```
 
+## 获取去除类型某个成员后的类型
+
+当可能的两个类型十分相似，b类型比a类型只少一两个类型成员时，不需要再额外对b写一遍。使用ts提供的`Omit`类型工具即可帮助我们去除a类型中的部分不需要的类型：
+
+```tsx
+type recordType = {
+  tags: number[],
+  note: string,
+  category: "+" | "-",
+  money: number,
+  createAt: string,
+}
+
+// 去除 createAt
+type newRecordType = Omit<recordType, "createAt">;
+```
+
+得到新类型
+
+```tsx
+type newRecordType = {
+  tags: number[],
+  note: string,
+  category: "+" | "-",
+  money: number,
+}
+```
+
+如果希望移除更多类型，可将第二个参数用`|`分隔需要移除的类型成员名：
+
+```tsx
+type newRecordType = Omit<recordType, "money" | "money">;
+```
+
 ## 自定义Hook返回值该使用什么类型
 
 前提：typescript**自动推测**自定义Hook返回值类型。
