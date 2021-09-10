@@ -1,8 +1,12 @@
-import type {NavbarGroup} from "@vuepress/theme-default";
+import type { NavbarGroup } from "@vuepress/theme-default";
 
 const nav: NavbarGroup = {
   text: "前端",
   children: [
+    {
+      text: 'npm & yarn',
+      link: '/web/npm/'
+    },
     {
       text: "Vue",
       children: [

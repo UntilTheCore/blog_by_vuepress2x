@@ -4,7 +4,7 @@ import navbar from "./navbar";
 import sideBar from './sidebar'
 
 export default defineUserConfig<DefaultThemeOptions>({
-  lang: "zh-CN",
+  lang: 'zh-CN',
   title: "untilthecore's blog",
   description: "欢迎访问 untilthecore 的个人博客",
   head: [
