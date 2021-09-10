@@ -1,4 +1,4 @@
-import type {NavbarGroup} from "@vuepress/theme-default";
+import type { NavbarGroup } from "@vuepress/theme-default";
 
 const nav: NavbarGroup = {
   text: "个人项目",
@@ -7,6 +7,10 @@ const nav: NavbarGroup = {
       text: "指尖账本(React)",
       link: '/project/fingertipsBook(react)/'
     },
+    {
+      text: '自由图床(React)',
+      link: '/project/freedrawingbed/'
+    }
   ]
 };
 
