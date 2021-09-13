@@ -28,12 +28,12 @@ const nav: NavbarGroup = {
       text: "React",
       children: [
         {
-          text: "antd",
-          link: "/web/react/"
+          text: "Mobx",
+          link: "/web/react/mobx/"
         },
         {
-          text: "dva",
-          link: "/web/react/"
+          text: "Redux",
+          link: "/web/react/redux/"
         },
       ]
     },
