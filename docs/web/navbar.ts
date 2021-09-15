@@ -26,6 +26,7 @@ const nav: NavbarGroup = {
     },
     {
       text: "React",
+      link: '/web/react/react/',
       children: [
         {
           text: "Mobx",

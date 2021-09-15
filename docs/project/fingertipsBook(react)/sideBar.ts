@@ -14,7 +14,7 @@ const sideBar: SidebarConfigArray = [
           '/project/fingertipsBook(react)/知识点/ReactRouter.md',
           '/project/fingertipsBook(react)/知识点/TreeShaking.md',
           '/project/fingertipsBook(react)/知识点/SVG.md',
-          '/project/fingertipsBook(react)/知识点/受控组件和非受控组件.md',
+          '/web/react/react/受控组件和非受控组件.md',
         ]
       },
       '/project/fingertipsBook(react)/项目部署.md',

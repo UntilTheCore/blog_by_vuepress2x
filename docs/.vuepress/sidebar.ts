@@ -10,6 +10,7 @@ import cplusSideBar from "../c/cplus/sideBar";
 import homeSideBar from "../home/sideBar";
 import ideSideBar from "../ide/sidebar";
 import freeDrawingBedSideBar from "../project/freedrawingbed/sideBar";
+import reactSideBar from "../web/react/react/sideBar";
 
 const sideBar: SidebarConfig = {
   "/project/fingertipsBook(react)/": projectSideBar,
@@ -23,6 +24,7 @@ const sideBar: SidebarConfig = {
   "/c/cplus/": cplusSideBar,
   "/ide/": ideSideBar,
   "/home/": homeSideBar,
+  "/web/react/react/": reactSideBar,
 };
 
 export default sideBar;
