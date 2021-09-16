@@ -11,6 +11,7 @@ import homeSideBar from "../home/sideBar";
 import ideSideBar from "../ide/sidebar";
 import freeDrawingBedSideBar from "../project/freedrawingbed/sideBar";
 import reactSideBar from "../web/react/react/sideBar";
+import antdSideBar from "../web/react/antd/sideBar";
 
 const sideBar: SidebarConfig = {
   "/project/fingertipsBook(react)/": projectSideBar,
@@ -25,6 +26,7 @@ const sideBar: SidebarConfig = {
   "/ide/": ideSideBar,
   "/home/": homeSideBar,
   "/web/react/react/": reactSideBar,
+  "/web/react/antd/": antdSideBar,
 };
 
 export default sideBar;
