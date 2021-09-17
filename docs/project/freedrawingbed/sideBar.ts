@@ -9,7 +9,7 @@ const sideBar: SidebarConfigArray = [
       {
         text: '知识点',
         children: [
-          '/project/freedrawingbed/知识点/组件懒加载.md',
+          '/web/react/react/组件懒加载.md',
         ]
       },
     ]
