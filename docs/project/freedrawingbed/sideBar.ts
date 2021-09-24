@@ -13,6 +13,7 @@ const sideBar: SidebarConfigArray = [
           "/server/serverless/leancloud/图片上传.md",
           "/web/react/mobx/局部状态数据.md",
           "/project/freedrawingbed/知识点/imageView2.md",
+          "/project/freedrawingbed/知识点/mobx对多store进行状态管理.md",
         ],
       },
     ],
