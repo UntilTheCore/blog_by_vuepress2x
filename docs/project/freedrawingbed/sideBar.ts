@@ -11,6 +11,7 @@ const sideBar: SidebarConfigArray = [
         children: [
           "/web/react/react/组件懒加载.md",
           "/server/serverless/leancloud/图片上传.md",
+          "/web/react/mobx/局部状态数据.md",
         ],
       },
     ],
