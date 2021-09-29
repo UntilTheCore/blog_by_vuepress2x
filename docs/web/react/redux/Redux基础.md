@@ -248,3 +248,46 @@ value for this reducer, you can use null instead of undefined.
 [每个应用程序只有一个 Redux Store](https://redux.js.org/style-guide/style-guide#only-one-redux-store-per-app)
 
 通常的应用整个组件树都只需一个`store`，也仅是在`<App />`组件外用`<Provider>`进行包裹。建议是不要将`createStore`创建出的`store`进行导出，多处引入`store`将可能导致行为不可预测。为避免错误的发生，可以只在项目`src/index.tsx`内使用`createStore`。
+
+## 使用ReduxDevTools监控状态改变
+
+像VueDevTools，在浏览器安装完成后即可监听Vuex的改变。但react+redux则不仅需要`react devtools`，还需要`redux devtools`协作配合状态的监听：
+
+1. 安装浏览器[ReduxDevTools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd)插件;
+
+2. npm安装[redux-devtools-extension](https://github.com/zalmoxisus/redux-devtools-extension) `yarn add redux-devtools-extension -D`;
+
+:::tip
+如果不需要一些高级配置的话，直接在创建store时，这样做即可。
+
+```ts
+ const store = createStore(
+   reducer, /* preloadedState, */
+   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+ );
+```
+
+:::
+
+写这么长的代码有些繁琐，如果涉及一些配置的话就更麻烦了，此时可以利用安装的`redux-devtools-extension`插件提供的函数进行配置。
+
+如果不需要配置中间件(middleware)或增强器(enhancers)的话，可以仅做这样的配置达成浏览器插件的状态监听。
+
+```ts
+import { createStore } from 'redux';
+import { devToolsEnhancer } from 'redux-devtools-extension';
+
+const store = createStore(reducer, /* preloadedState, */ devToolsEnhancer({});
+```
+
+如果想要进行代码追踪的话，可以配置成这样：`devToolsEnhancer({trace: true})`
+
+![追踪action调用](https://user-images.githubusercontent.com/7957859/50161148-a1639300-02e3-11e9-80e7-18d3215a0bf8.gif)
+
+图片引用自：[https://github.com/zalmoxisus/redux-devtools-extension/blob/master/docs/Features/Trace.md](https://github.com/zalmoxisus/redux-devtools-extension/blob/master/docs/Features/Trace.md)
+
+:::tip
+如果使用`RTK(Redux ToolsKit)`，已默认进行了一些配置，无需我们再手动配置！详阅[RTK DevTools](https://redux-toolkit.js.org/api/configureStore#devtools)
+:::
+
+更多配置请参考: [redux-devtools-extension](https://github.com/zalmoxisus/redux-devtools-extension#redux-devtools-extension) 、[Redux DevTools](https://redux.js.org/tutorials/fundamentals/part-4-store#redux-devtools) 
