@@ -14,3 +14,6 @@
 
 Redux相关内容都与typescript结合使用。
 
+本系列教程对应的代码案例：
+
+- [Redux 基础](https://github.com/UntilTheCore/redux-ts-demo)
