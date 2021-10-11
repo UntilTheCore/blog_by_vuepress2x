@@ -8,11 +8,12 @@ branchs:
   only:
   - main
 addons:
-  ssh_known_hosts: $SERVER_IP
+  ssh_known_hosts: 162.14.64.8
 before_install:
 - openssl aes-256-cbc -K $encrypted_d0435390278d_key -iv $encrypted_d0435390278d_iv
   -in id_rsa_blog.enc -out ~/.ssh/id_rsa_blog -d
 - chmod 600 ~/.ssh/id_rsa_blog
+- echo -e "Host 162.14.64.8\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 - yarn global add vuepress@next
 install:
 - yarn install
