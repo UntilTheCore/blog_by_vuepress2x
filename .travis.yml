@@ -1,0 +1,9 @@
+language: node_js
+node_js:
+- '12'
+branchs:
+  only:
+  - main
+before_install:
+- openssl aes-256-cbc -K $encrypted_f4b07a66d1cb_key -iv $encrypted_f4b07a66d1cb_iv
+  -in id_rsa_blog.enc -out id_rsa_blog -d
