@@ -22,4 +22,4 @@ script:
 - pwd
 - cd docs/.vuepress/dist
 - pwd
-- scp -o stricthostkeychecking=no -r ./* root@162.14.64.8:/root/web/blog
+- scp -o stricthostkeychecking=no -r ./* $SERVER_NAME@$SERVER_IP:/$SERVER_NAME/web/blog
