@@ -12,8 +12,8 @@ addons:
 before_install:
 - openssl aes-256-cbc -K $encrypted_d0435390278d_key -iv $encrypted_d0435390278d_iv
   -in id_rsa_blog.enc -out ~/.ssh/id_rsa_blog -d
+- chmod 700 ~/.ssh
 - chmod 600 ~/.ssh/id_rsa_blog
-- echo -e "Host 162.14.64.8\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 - yarn global add vuepress@next
 install:
 - yarn install
@@ -21,4 +21,4 @@ script:
 - yarn build
 after_success:
 - cd docs/.vuepress/dist
-- scp -o stricthostkeychecking=no -r ./* $SERVER_NAME@$SERVER_IP:/root/web/blog
+- scp -o stricthostkeychecking=no -r ./* root@162.14.64.8:/root/web/blog
