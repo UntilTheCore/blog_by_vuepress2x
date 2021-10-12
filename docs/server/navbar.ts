@@ -4,6 +4,13 @@ const nav: NavbarGroup = {
   text: "后端",
   children: [
     {
+      text: 'Server',
+      children: [{
+        text: 'Nginx',
+        link: '/server/nginx/',
+      }]
+    },
+    {
       text: "ServerLess",
       children: [{
         text: 'LeanCloud',
