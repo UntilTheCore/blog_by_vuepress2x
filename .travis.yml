@@ -25,4 +25,4 @@ script:
 - yarn build
 after_success:
 - cd docs/.vuepress/dist
-- scp -o stricthostkeychecking=no -r ./* ${SERVER_NAME}@${SERVER_IP}:/travis
+- scp -o stricthostkeychecking=no -r ./* ${SERVER_NAME}@${SERVER_IP}:~/web/blog
