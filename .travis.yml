@@ -8,14 +8,14 @@ branchs:
   only:
   - main
 addons:
-  ssh_known_hosts: 162.14.64.8
+  ssh_known_hosts: ${SERVER_IP}
 before_install:
 - openssl aes-256-cbc -K $encrypted_d0435390278d_key -iv $encrypted_d0435390278d_iv
   -in id_rsa_blog.enc -out ~/.ssh/id_rsa_blog -d
 - chmod 700 ~
 - chmod 700 ~/.ssh
 - chmod 600 ~/.ssh/id_rsa_blog
-- echo -e "Host 162.14.64.8\nUser root\nStrictHostKeyChecking no\nIdentityFile ~/.ssh/id_rsa_blog" > ~/.ssh/config
+- echo -e "Host ${SERVER_IP}\nUser root\nStrictHostKeyChecking no\nIdentityFile ~/.ssh/id_rsa_blog" > ~/.ssh/config
 - chmod 600 ~/.ssh/config
 - cat ~/.ssh/config
 - yarn global add vuepress@next
@@ -25,4 +25,4 @@ script:
 - yarn build
 after_success:
 - cd docs/.vuepress/dist
-- scp -o stricthostkeychecking=no -r ./* ${SERVER_NAME}@${SERVER_IP}:~/web/blog
+- scp -o stricthostkeychecking=no -r ./* ${SERVER_NAME}@${SERVER_IP}:/usr/local/nginx/html/blog
