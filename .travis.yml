@@ -15,8 +15,9 @@ before_install:
 - chmod 700 ~
 - chmod 700 ~/.ssh
 - chmod 600 ~/.ssh/id_rsa_blog
-- echo -e "Host lbinin.com\n\tStrictHostKeyChecking no\n\tIdentityFile ~/.ssh/id_rsa_blog" >> ~/.ssh/config
+- echo -e "Host ${SERVER_NAME}\n\tStrictHostKeyChecking no\n\tIdentityFile ~/.ssh/id_rsa_blog" >> ~/.ssh/config
 - chmod 600 ~/.ssh/config
+- cat ~/.ssh/config
 - yarn global add vuepress@next
 install:
 - yarn install
