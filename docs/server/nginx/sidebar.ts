@@ -4,7 +4,8 @@ const sideBar: SidebarConfigArray = [
   {
     'text': 'Nginx',
     'children': [
-      '/server/Nginx/README.md',
+      '/server/nginx/README.md',
+      '/server/nginx/nginx补充安装.md',
     ]
   },
 ]
