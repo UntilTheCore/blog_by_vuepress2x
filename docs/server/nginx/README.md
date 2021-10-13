@@ -1,6 +1,8 @@
-# Nginx
+# Nginx安装指南
 
 ## 在CentOS7上安装Nginx
+
+Nginx可以直接在不同平台使用[包进行安装](https://nginx.org/en/linux_packages.html)，本文使用[本地安装](https://nginx.org/en/docs/configure.html)。
 
 Nginx需要使用`gcc`在本地编译安装，而且其需要使用相关的依赖来完成本地编译并提供服务，在安装之前需要先检查系统中是否安装相关依赖软件包。所需软件包有：`gcc`、`pcre`、`pcre-devel`、`zlib`、`zlib-devel`、`openssl`、`openssl-devel`
 
@@ -53,15 +55,21 @@ cd nginx-1.18.0
 # 使用默认配置
 ./configure
 
-# 编译 
+# 若需要使用SSL，则需要添加相关安装参数
+# 更多安装配置可前往 https://nginx.org/en/docs/configure.html
+./configure --with-http_ssl_module
+
+# 编译 构建软件
 make
 
-# 编译安装
+# 安装
 make install
 
 # 查找安装路径，默认路径为： /usr/local/nginx
 whereis nginx
 ```
+
+了解`configure`、`make`、`make install`命令，[看这里](https://zhuanlan.zhihu.com/p/77813702)
 
 ### 5.启停nginx
 
@@ -132,14 +140,14 @@ chmod 755 rc.local
 
 如果应用是运行于服务器内某个端口的服务，可以这样配置，让nginx监听服务的端口，比如nuxt或next的ssr应用需要使用此种配置。
 
-```bash
+```nginx
 http {
   server {
-    #listen为监听的端口
+    # listen为监听的端口
     listen       80;
-    #server_name为域名
+    # server_name为域名
     server_name  www.your-server-ip.com;
-    #location是访问地址的设置,locahost也可以用服务器ip代替
+    # location是访问地址的设置,locahost也可以用服务器ip代替
     location / {
       proxy_pass http://localhost:8080; 
     }
@@ -149,14 +157,14 @@ http {
 
 若只是代理静态目录，则需在`location`中在`root`配置访问目录，并配置首页文件：
 
-```bash
+```nginx
 http {
   server {
-    #listen为监听的端口
+    # listen为监听的端口
     listen       80;
-    #server_name为域名
+    # server_name为域名
     server_name  www.your-server-ip.com;
-    #location是访问地址的设置,locahost也可以用服务器ip代替
+    # location是访问地址的设置,locahost也可以用服务器ip代替
     location / {
       root /home/nginx/app;
       index index.html index.htm;
@@ -166,3 +174,82 @@ http {
 ```
 
 nginx默认访问路径是`/usr/local/nginx/html`，可以将其替换为其他的当前用户可访问的目录。不能使用`~`方式的路径，可以在完成配置后使用`./nginx -t`来测试配置是否有效。
+
+#### 443端口配置SSL证书
+
+在配置SSL之前，需确定是否为`Nginx`安装了支持ssl的模块。若未安装，则需要先将其[补充安装](nginx补充安装.md)！
+
+1. 下载SSL证书并解压（SSL证书在云服务商证书管理提供下载）；
+2. 找到`/Nginx`目录内后缀为`crt`和`key`的两个文件拷贝到服务器`/usr/local/nginx/conf`目录；
+3. 可照如下内容配置`nginx.conf`文件的`server`部分
+
+```nginx
+server {
+    #SSL 访问端口号为 443
+    listen 443 ssl; 
+    #填写绑定证书的域名
+    server_name www.your-server-name.com; 
+    #证书文件名称
+    ssl_certificate 你的证书.crt; 
+    #私钥文件名称
+    ssl_certificate_key 你的证书.key; 
+    ssl_session_timeout 5m;
+    #请按照以下协议配置
+    ssl_protocols TLSv1 TLSv1.1 TLSv1.2; 
+    #请按照以下套件配置，配置加密套件，写法遵循 openssl 标准。
+    ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:HIGH:!aNULL:!MD5:!RC4:!DHE; 
+    ssl_prefer_server_ciphers on;
+    location / {
+       #网站主页路径。此路径仅供参考，具体请您按照实际目录操作。
+        root html; 
+        index  index.html index.htm;
+    }
+}
+```
+
+4. 验证配置是否正确；
+
+```bash
+/usr/local/nginx/sbin/nginx -t
+```
+
+5. 生效配置
+
+方式一：
+
+```bash
+/usr/local/nginx/sbin/nginx -s reload
+```
+
+方式二：
+
+重启nginx
+
+#### 配置http自动跳转https
+
+Nginx 支持 rewrite 功能。若在编译时没有去掉 pcre，可在 HTTP 的 `server` 中增加 `return 301 https://$host$request_uri;`，即可将默认80端口的请求重定向为 HTTPS。
+
+新增一个server
+
+```nginx
+server {
+    listen 80;
+    #填写绑定证书的域名
+    server_name www.你的域名.com; 
+    #把http的域名请求转成https
+    return 301 https://$host$request_uri; 
+}
+```
+
+利用nginx此功能，可以将不含`www`的域名访问请求重定向到https上。同样上述配置：
+
+```text
+将
+server_name www.你的域名.com
+改为
+server_name 你的域名.com即可。
+```
+
+:::tip
+如果提供同一资源服务的站，不要同时开设多域名的站点，将域名访问统一。可集中搜索引擎权重，利于SEO！
+:::
