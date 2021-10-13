@@ -4,7 +4,15 @@ import CNav from "../c/navbar";
 import ProjectNav from "../project/navbar";
 import ideNav from "../ide/navbar";
 import serverNav from "../server/navbar";
+import cicdNav from "../ci&cd/navbar";
 
-const nav: NavbarConfig = [WebNav, serverNav, CNav, ProjectNav, ideNav];
+const nav: NavbarConfig = [
+  WebNav,
+  serverNav,
+  cicdNav,
+  CNav,
+  ProjectNav,
+  ideNav,
+];
 
 export default nav;

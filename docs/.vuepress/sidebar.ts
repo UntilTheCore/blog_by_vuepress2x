@@ -13,7 +13,8 @@ import freeDrawingBedSideBar from "../project/freedrawingbed/sideBar";
 import reactSideBar from "../web/react/react/sideBar";
 import antdSideBar from "../web/react/antd/sideBar";
 import leancloudSideBar from "../server/serverless/leancloud/siebar";
-import nginxSizeBar from "../server/nginx/sidebar";
+import nginxSideBar from "../server/nginx/sidebar";
+import cicdSideBar from "../ci&cd/sidebar";
 
 const sideBar: SidebarConfig = {
   "/project/fingertipsBook(react)/": projectSideBar,
@@ -30,7 +31,8 @@ const sideBar: SidebarConfig = {
   "/web/react/react/": reactSideBar,
   "/web/react/antd/": antdSideBar,
   "/server/serverless/leancloud/": leancloudSideBar,
-  "/server/nginx/": nginxSizeBar,
+  "/server/nginx/": nginxSideBar,
+  "/ci&cd/": cicdSideBar,
 };
 
 export default sideBar;
