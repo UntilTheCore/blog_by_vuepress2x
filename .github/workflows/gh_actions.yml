@@ -24,13 +24,25 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
-
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
-        run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '12'
+          
+      - name: install vuepress
+        run: yarn global add vuepress@next
+        
+      - name: install dependencies
+        run: yarn install
+        
+      - name: build
+        run: yarn build
+      
+      - name: SFTP Deploy
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.1
+        with:
+          username: '${{ secrets.SERVER_NAME }}'
+          server: '${{ secrets.SERVER_IP }}'
+          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+          local_path: './dist/*'
+          remote_path: '/travis'
+          args: '-o ConnectTimeout=5 StrictHostKeyChecking=no'
