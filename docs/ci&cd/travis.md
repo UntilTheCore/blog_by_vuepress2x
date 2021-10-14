@@ -117,6 +117,12 @@ PubkeyAuthentication yes
 PermitRootLogin yes
 ```
 
+完成对`sshd_config`的修改需要重启`sshd`
+
+```shell
+sudo systemctl restart sshd
+```
+
 ### 出现Permission Denied (publickey,gssapi-keyex,gssapi-with-mic)
 
 如果登录时出现`Permission Denied (publickey,gssapi-keyex,gssapi-with-mic)`则注释掉这两项配置：
