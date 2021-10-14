@@ -43,6 +43,6 @@ jobs:
           username: '${{ secrets.SERVER_NAME }}'
           server: '${{ secrets.SERVER_IP }}'
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
-          local_path: './dist/*'
+          local_path: './docs/.vuepress/dist/*'
           remote_path: '/travis'
           args: '-o StrictHostKeyChecking=no'
