@@ -7,6 +7,10 @@ const nav: NavbarGroup = {
       text: "Travis",
       link: "/ci&cd/travis.md",
     },
+    {
+      text: "Github Actions",
+      link: "/ci&cd/github_action.md",
+    }
   ],
 };
 
