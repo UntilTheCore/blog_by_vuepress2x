@@ -45,4 +45,4 @@ jobs:
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
           local_path: './dist/*'
           remote_path: '/travis'
-          args: '-o ConnectTimeout=5 StrictHostKeyChecking=no'
+          args: '-o StrictHostKeyChecking=no'
