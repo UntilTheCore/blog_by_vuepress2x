@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: deploy blog
 
 # Controls when the workflow will run
 on:
@@ -44,5 +44,5 @@ jobs:
           server: '${{ secrets.SERVER_IP }}'
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
           local_path: './docs/.vuepress/dist/*'
-          remote_path: '/travis'
+          remote_path: '/usr/local/nginx/html/blog'
           args: '-o StrictHostKeyChecking=no'
