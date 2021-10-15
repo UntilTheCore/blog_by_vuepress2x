@@ -27,9 +27,6 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '12'
-          
-      - name: install vuepress
-        run: yarn global add vuepress@next
         
       - name: install dependencies
         run: yarn install
@@ -45,4 +42,3 @@ jobs:
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
           local_path: './docs/.vuepress/dist/*'
           remote_path: '/usr/local/nginx/html/blog'
-          args: '-o StrictHostKeyChecking=no'
