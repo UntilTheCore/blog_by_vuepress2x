@@ -5,6 +5,7 @@ const sideBar: SidebarConfigArray = [
     'text': 'Crystal UI',
     'children': [
       '/project/crystal-ui/README.md',
+      '/project/crystal-ui/QA.md',
     ]
   },
 ]
