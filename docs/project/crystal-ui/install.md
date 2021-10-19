@@ -119,4 +119,6 @@ export default defineConfig({
 }
 ```
 
-注：在`tsconfig.json => paths`中，一定要为配置的键值都额外加上`/*`（前提是你需要这个目录内的所有内容），否则IDE将无法实现正确的路径提示！不论`paths`还是`alias`都可以配置直接指向具体文件的路径，这就看各自需求了。
+注：在`tsconfig.json => paths`中，一定要为配置的键值都额外加上`/*`（前提是你需要这个目录内的所有内容），否则IDE将无法实现正确的路径提示！不论`paths`还是`alias`都可以配置直接指向具体文件的路径，这就看各自需求了。另外，内为了保证特殊模块的访问，`paths`内可以配置多于`alias`的路径，只不过是`path`内有的，`alias`内也需要有！
+
+参考资料：[模块解析](https://www.tslang.cn/docs/handbook/module-resolution.html#base-url)
