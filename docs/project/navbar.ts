@@ -5,13 +5,17 @@ const nav: NavbarGroup = {
   children: [
     {
       text: "指尖账本(React)",
-      link: '/project/fingertipsBook(react)/'
+      link: "/project/fingertipsBook(react)/",
     },
     {
-      text: '自由图床(React)',
-      link: '/project/freedrawingbed/'
-    }
-  ]
+      text: "自由图床(React)",
+      link: "/project/freedrawingbed/",
+    },
+    {
+      text: "水晶UI(Vue3)",
+      link: "/project/crystal-ui/",
+    },
+  ],
 };
 
 export default nav;

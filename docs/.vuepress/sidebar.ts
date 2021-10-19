@@ -15,6 +15,7 @@ import antdSideBar from "../web/react/antd/sideBar";
 import leancloudSideBar from "../server/serverless/leancloud/siebar";
 import nginxSideBar from "../server/nginx/sidebar";
 import cicdSideBar from "../ci&cd/sidebar";
+import crystalUiSideBar from "../project/crystal-ui/sideBar";
 
 const sideBar: SidebarConfig = {
   "/project/fingertipsBook(react)/": projectSideBar,
@@ -33,6 +34,7 @@ const sideBar: SidebarConfig = {
   "/server/serverless/leancloud/": leancloudSideBar,
   "/server/nginx/": nginxSideBar,
   "/ci&cd/": cicdSideBar,
+  "/project/crystal-ui/": crystalUiSideBar,
 };
 
 export default sideBar;
