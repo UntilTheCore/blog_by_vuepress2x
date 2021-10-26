@@ -157,6 +157,19 @@ export default {
 
 这番调整等于是把v2中的`value`和`input`的硬绑定取消了，并将默认`v-model`的绑定方式以类似`.sync`的需求格式进行绑定。这样做的好处是默认的`modelValue`和其余自定义`props`是同级的了，只是v3中直接使用`v-model`所表示的就是`v-model:modelValue`。
 
+:::tip
+原生控件`input`的属性和事件绑定方式没有发生改变：
+
+注意：原生控件值的绑定是`$event.target.value`而自定义组件只用`$event`
+
+```vue
+<input :value="searchText" @input="searchText = $event.target.value" />
+<!-- 简化后 -->
+<input v-model="searchText" />
+```
+
+:::
+
 ### 移除了`.sync`修饰符和`model`组件选项
 
 v3中的`v-model`支持多个`props`的绑定，且书写和阅读更为友好。因此，这两项（.sync、model）被淘汰了。
@@ -181,6 +194,7 @@ v3中的`v-model`支持多个`props`的绑定，且书写和阅读更为友好�
 <script>
 export default {
   props: {
+    // 注意：现在的默认值都必须被显式声明！
     modelValue: {
       type: Number,
       default: 0,
