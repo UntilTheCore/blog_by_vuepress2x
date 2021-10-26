@@ -7,6 +7,7 @@ const sideBar: SidebarConfigArray = [
       "/web/vue/vue3/README.md",
       "/web/vue/vue3/provide-inject.md",
       "/web/vue/vue3/vue3-v-model.md",
+      "/web/vue/vue3/$attrs.md",
     ],
   },
 ];
