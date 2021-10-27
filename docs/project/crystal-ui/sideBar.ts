@@ -6,6 +6,7 @@ const sideBar: SidebarConfigArray = [
     children: [
       "/project/crystal-ui/README.md",
       "/project/crystal-ui/install.md",
+      "/project/crystal-ui/attention.md",
       "/web/vue/vue3/provide-inject.md",
       "/project/crystal-ui/QA.md",
     ],
