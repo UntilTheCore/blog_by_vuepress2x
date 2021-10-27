@@ -463,7 +463,7 @@ export default {
 
 响应式的属性用props声明，它会自动从`$attrs`中剥离，这就像是`emits`一样。优化后的代码将会是这样：
 
-```vue
+```vue {5,7,17-20}
 <!-- 省略了部分代码 -->
 <template>
   <div class="date-picker">
@@ -488,7 +488,7 @@ export default {
 </script>
 ```
 
-参考资料：[Context](https://v3.cn.vuejs.org/guide/composition-api-setup.html#context)、[useAttrs](https://v3.cn.vuejs.org/api/sfc-script-setup.html#useslots-%E5%92%8C-useattrs)
+参考资料：[Context](https://v3.cn.vuejs.org/guide/composition-api-setup.html#context)、[useAttrs](https://v3.cn.vuejs.org/api/sfc-script-setup.html#useslots-%E5%92%8C-useattrs)、[示例代码](https://codesandbox.io/s/relaxed-river-ukj6g?file=/src/components/DatePicker.vue)
 
 ## 总结
 
