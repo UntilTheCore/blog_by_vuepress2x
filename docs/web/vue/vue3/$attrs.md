@@ -103,6 +103,7 @@ export default {
 ::::code-group
 
 :::code-group-item Grandpa组件
+
 ```vue
 <!-- Grandpa.vue -->
 <template>
@@ -298,13 +299,13 @@ export default {
 
 若未配置`inheritAttrs`且`emits`未声明的结果就是一次`emit('click',$event)`产生两次`click`调用，这是非预期的！
 
-或许你会觉得，配置了`inheritAttrs: false`不就可以解决这个问题了吗？是的，这可以解决，但违背了上述的思想，大家都本应各司其职，分工协作！下面我将通过另外一个例子来讲解这个过程：
+或许你会觉得，配置了`inheritAttrs: false`不就可以解决这个问题了吗？是的，这可以解决，但违背了上述的思想，大家都本应各司其职，分工协作！下面将通过一个例子来讲解这个过程（这个例子并不完整，需要结合下文[setup内获取的attrs非响应式](./$attrs.md#setup内获取的attrs非响应式)阅读）：
 
 ```vue
-<!-- Father.vue -->
+<!-- App.vue -->
 <template>
   <div>
-    <Child
+    <DatePicker
       v-model="show"
       :style="customStyle"
       size="large"
@@ -315,11 +316,11 @@ export default {
 </template>
 
 <script>
-import Child from "./components/Child.vue";
+import DatePicker from "./components/DatePicker.vue";
 export default {
   name: "App",
   components: {
-    Child,
+    DatePicker,
   },
   data() {
     return {
@@ -341,13 +342,18 @@ export default {
 </script>
 ```
 
-```vue
-<!-- Child.vue -->
+```vue {5,7,21,34,49}
+<!-- DatePicker.vue -->
 <template>
   <div class="date-picker">
-    <h2 v-bind="rest" @click="handClick">toggle popover</h2>
+    <!-- $attrs 包含了 size、style、@mouseover -->
+    <h2 v-bind="$attrs" @click="handClick">toggle popover</h2>
+    <!-- 用 size 单独控制 p 样式 -->
     <p :class="[size]">hello world!</p>
+    <!-- 注意：如果 Popover 内有一个 change 事件和外部通信，
+    那么可以将 $attrs中change结构出来绑定传入 -->
     <Popover v-if="modelValue" />
+    <!-- handleChange 中触发与父组件的通信 -->
     <button @click="handleChange">use change</button>
   </div>
 </template>
@@ -356,7 +362,8 @@ export default {
 import Popover from "./Popover.vue";
 export default {
   inheritAttrs: false,
-  emits: ["change"],
+  // v-model 的事件也应被声明
+  emits: ["change", "update:modelValue"],
   props: {
     modelValue: {
       type: Boolean,
@@ -367,8 +374,10 @@ export default {
     Popover,
   },
   setup(props, context) {
-    const { size, ...rest } = context.attrs;
-    return { size, rest };
+    // attrs可以被解构，用于将不同的属性应用于不同的地方
+    // 注意：context就是一个普通对象，不具有响应式
+    const { size } = context.attrs;
+    return { size };
   },
   methods: {
     handClick() {
@@ -388,4 +397,101 @@ export default {
 </style>
 ```
 
+这里的自定义`DatePicker`组件模拟点击后`Popover`的显示隐藏以及鼠标划入时的样式更改。代码19行处，将`change`和`update:modelValue`这些和上一级组件通信的事件进行声明，这样它们就不会跟随`$atrrs`绑定到其他地方了！
+
+可以在`created`生命周期和`setup`函数内将`attrs`解构获取非响应式的属性，这可将一些静态不变的内容解构出来提供给组件内部不同的元素使用！
+
 参考资料：[Vue3 emits](https://v3.cn.vuejs.org/guide/migration/emits-option.html#%E7%A4%BA%E4%BE%8B)
+
+### setup内获取的attrs非响应式
+
+若`$attrs`内的属性需要**解构拆分**，那就把响应式属性通过`props`传递，原因是`$attrs`本身是响应式的，但在`setup(props,context) => context.attrs`和`useAttrs`中获得的`attrs`都是普通非响应式对象！
+
+继续结合上文[自定义组件在emits声明事件]($attrs.md#自定义组件在emits声明事件)中的代码例子。上例代码行5中，你是否注意到，使用的是`$attrs`，这会造成将所有的属性（除了emits中声明的和props声明的）绑定于此。除了行7因有需求使用了解构的`size`，行5却也多余绑定了！那你是否会自然想到`size`结构后，把剩余属性使用扩展运算符放到一个变量里面，就像这样：
+
+```vue {5,13}}
+<!-- 简化了部分代码 -->
+<template>
+  <div class="date-picker">
+    <!-- rest 包含了 style、@mouseover，没有了 size -->
+    <h2 v-bind="rest" @click="handClick">toggle popover</h2>
+  </div>
+</template>
+
+<script>
+  setup(props, context) {
+    // attrs可以被解构，用于将不同的属性应用于不同的地方
+    // 注意：context就是一个普通对象，不具有响应式
+    const { size, ...rest } = context.attrs;
+    return { size, rest };
+  },
+</script>
+```
+
+但这样做的结果就是，鼠标移入后，`mouseover`触发了，但`h2`样式却没有发生改变！原因就是`context`不是一个响应式对象，内部属性也不是！于是有了新的`style`而`rest`内的`style`还是旧的值，h2的字体的颜色因此不会发生变化。
+
+那有没有办法处理这个问题？有，`$attrs`是响应式的，因此可以在`onBeforeUpdate`中获取其最新值：
+
+```vue {12-18}}
+<!-- 省略了部分代码 -->
+<template>
+  <div class="date-picker">
+    <!-- rest 包含除了 size 的所有属性: style、@mouseover -->
+    <h2 v-bind="rest" @click="handClick">toggle popover</h2>
+    <!-- 用 s 单独控制 p 样式 -->
+    <p :class="[s]">hello world!</p>
+  </div>
+</template>
+<script>
+  setup(props, context) {
+    const rest = ref(context.attrs);
+    const s = ref(context.attrs.size);
+    // 每次更新的时候获取一下最新的 attrs
+    onBeforeUpdate(() => {
+      const { size, ...rest } = context.attrs;
+      rest.value = rest;
+      s.value = size;
+    });
+    return { s, rest };
+  },
+</script>
+```
+
+看完这段代码，是否心中有个想法：“这整太复杂了吧！”。确实是，所以千万不要写这样的代码出来！这也不是最佳解决方案。
+
+#### 响应式的属性用props
+
+响应式的属性用props声明，它会自动从`$attrs`中剥离，这就像是`emits`一样。优化后的代码将会是这样：
+
+```vue
+<!-- 省略了部分代码 -->
+<template>
+  <div class="date-picker">
+    <!-- $attrs 只包含 style、@mouseover -->
+    <h2 v-bind="$attrs" @click="handClick">toggle popover</h2>
+    <!-- 用 size 单独控制 p 样式 -->
+    <p :class="[size]">hello world!</p>
+  </div>
+</template>
+<script>
+  emits: ["change", "update:modelValue"],
+  props: {
+    modelValue: {
+      type: Boolean,
+      required: true,
+    },
+    size: {
+      type: String,
+      default: "normal",
+    },
+  },
+</script>
+```
+
+参考资料：[Context](https://v3.cn.vuejs.org/guide/composition-api-setup.html#context)、[useAttrs](https://v3.cn.vuejs.org/api/sfc-script-setup.html#useslots-%E5%92%8C-useattrs)
+
+## 总结
+
+看到现在，我们已经知道`$attrs`的优势在于可以简化属性的绑定，这在创建UI组件时尤为有用（vue文档也用select来举例），我们可以通过`$attrs`快速将诸如表单元素的`click`、`foucs`、`blur`等事件进行绑定，但对于可能的有响应式的变量属性需通过`props`来传入（被`props`声明过的将不再出现在`$attrs`中）。
+
+因此，你要先确定这个响应式的变量是否需要从`$attrs`中被拆分，所以你需要明确属性的用途和可能发生的情形！但如果所有的属性都绑定在同一个元素上，那就直接`v-bind="$attrs"`享受它带来的便捷吧！
