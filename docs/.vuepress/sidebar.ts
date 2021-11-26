@@ -8,7 +8,7 @@ import reduxSideBar from "../web/react/redux/sideBar";
 import cSideBar from "../c/c/sideBar";
 import cplusSideBar from "../c/cplus/sideBar";
 import homeSideBar from "../home/sideBar";
-import ideSideBar from "../ide/sidebar";
+import othersSideBar from "../others/sidebar";
 import freeDrawingBedSideBar from "../project/freedrawingbed/sideBar";
 import reactSideBar from "../web/react/react/sideBar";
 import antdSideBar from "../web/react/antd/sideBar";
@@ -27,7 +27,7 @@ const sideBar: SidebarConfig = {
   "/web/react/redux/": reduxSideBar,
   "/c/c/": cSideBar,
   "/c/cplus/": cplusSideBar,
-  "/ide/": ideSideBar,
+  "/others/": othersSideBar,
   "/home/": homeSideBar,
   "/web/react/react/": reactSideBar,
   "/web/react/antd/": antdSideBar,

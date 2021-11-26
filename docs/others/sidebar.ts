@@ -2,9 +2,9 @@ import type { SidebarConfigArray } from '@vuepress/theme-default';
 
 const sideBar: SidebarConfigArray = [
   {
-    'text': 'IDE',
+    'text': 'Others',
     'children': [
-      '/ide/vscode.md',
+      '/others/vscode.md',
     ]
   },
 ]
