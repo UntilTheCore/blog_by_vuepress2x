@@ -62,3 +62,7 @@ vscode对`.vue`的支持并没有像`react`那么好，在`template`内想要点
 ```
 
 以上内容需根据自身需求配置，切不可直接完全照搬！
+
+### Vue Volar Extention Pack
+
+若使用了Vue3，官方指定推荐的vs插件是 `Volar` 。如果初次配置vscode，推荐直接搜索 `Vue Volar Extention Pack` 这个插件包，并按需安装里面推荐的插件，或者你也可以完全安装。使用Volar后，不仅可识别 `vue` 文件的导入，连 `template` 中的 `class` 也支持 `ctrl`+`鼠标左键` (F12)快速跳转！这更是增强了 `Vue3` 的
