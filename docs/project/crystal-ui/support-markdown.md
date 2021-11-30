@@ -105,11 +105,11 @@ export function vitePluginMd(): Plugin {
 
 你可以不了解 `vite` 和 `rollup` 的插件机制，通过下面的介绍可以完全理解源码内容，若期望深入了解具体细节，推荐阅读以下相关内容 [Vite Plugin](https://vitejs.cn/guide/api-plugin.html#plugin-api) 、 [Rollup transform](https://rollupjs.org/guide/en/#transform) 、 [NodeJS Http](http://nodejs.cn/api/http.html)。
 
-`configureServer`这个配置可以影响在本地开发环境时的内容，而 `transform` 则是影响在打包时的内容。他们的核心能力是对文件的二次处理，有点像 `loader` 。在此处就是将被 `marked` 编译过成字符串的 `.md` 文件输出给引用处的 `import` 以供使用。`mdToJs` 就是完成这个操作的核心功臣，它将文件编译，然后将编译好的字符串前添加 `export default` 让浏览器得以识别！
+`configureServer`这个配置可以影响在本地开发环境时的内容，而 `transform` 则可以同时影响在打包（生产环境）和开发环境的内容，也就是说，你可以忽略 `configureServer` 只使用 `transform` 实现插件功能。他们的核心能力是对文件的二次处理，有点像 `loader` 。在此处就是将被 `marked` 编译过成字符串的 `.md` 文件输出给引用处的 `import` 以供使用。`mdToJs` 就是完成这个操作的核心功臣，它将文件编译，然后将编译好的字符串前添加 `export default` 让浏览器得以识别！
 
 在旧版的`vite`中，开发服务器使用是的 `koa` ，一些网上旧的资料所提供的插件编写办法也是基于此，因此在新版 `vite` 中无法运行，所以我在文章最开始说明了所用版本，希望你在阅读此文并操作时避免版本不同而引发的错误！
 
-当前版本的 `vite` 开发服务器大致完全使用 `Node` 原生 `http` 的能力，因此需要去简单了解一下。需要注意的是在浏览器的文件导入时对文件的引入路径是 `.md?import` ，因此需要进行一定的字符串裁剪，然后通过路径拼接在本地获取相关 `.md` 文件。对不需要处理的文件一定要执行 `next` 将请求放行，否则将使页面卡住！
+当前版本的 `vite` 开发服务器使用了 [connect](https://github.com/senchalabs/connect) ，所需知识和 `Node` 原生 `http` 大致类似，因此仅需要去简单了解一下即可。需要注意的是在浏览器的文件导入时对文件的引入路径是 `.md?import` ，因此需要进行一定的字符串裁剪，然后通过路径拼接在本地获取相关 `.md` 文件。对不需要处理的文件一定要执行 `next` 将请求放行，否则将使页面卡住！
 
 `transform` 中参数名有些奇怪，`id` 是文件名（含路径），`code` 内是文件的内容，`transform` 在 `return` 时提供新的文件内容。
 
