@@ -1,5 +1,17 @@
 # 注意事项
 
+## 关于 Vue
+
+### 公共组件加上 key
+
+我们都知道 `v-for` 时要为组件提供唯一的 `key` ，但在其他场景下，即非 `v-for` 渲染组件时，用到了公共组件也要为其提供 `key` ，尤其是在同一页面下有多个地方使用了这些组件，若不提供，会使得 `Vue` 将无法识别组件唯一性，从而使页面无法正确显示。
+
+```ts
+h(Markdown, {filename: '../markdown/intro.md', key: 'intro'});
+
+h(Markdown, {filename: '../markdown/install.md', key: 'install'});
+```
+
 ## 关于CSS
 
 ### UI库组件的style上不加scope
