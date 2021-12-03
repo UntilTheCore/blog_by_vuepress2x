@@ -113,7 +113,7 @@ export function vitePluginMd(): Plugin {
 
 `transform` 中参数名有些奇怪，`id` 是文件名（含路径），`code` 内是文件的内容，`transform` 在 `return` 时提供新的文件内容。
 
-注意：插件提供的是项目运行前的转译，因此在本地编写的 `markdown` 文件不支持热更新，在内容更新时需要重启项目。
+注意：若只使用 `configureServer` 配置项的话，由于插件提供的是项目运行前的转译，因此在本地编写的 `markdown` 文件不支持热更新，在内容更新时需要重启项目。而抛开此配置项只用 `transform` 来完成转换的，则是可以支持热更新的，因此，除非是有特别需求，则只使用 `transform` 即可！
 
 ### markdown 文件引入
 
