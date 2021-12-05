@@ -11,6 +11,7 @@ const sideBar: SidebarConfigArray = [
       "/project/crystal-ui/type-of-checking.md",
       "/project/crystal-ui/support-markdown.md",
       "/project/crystal-ui/source-code-extractor.md",
+      "/project/crystal-ui/support-code-highlighting.md",
       "/project/crystal-ui/QA.md",
     ],
   },
