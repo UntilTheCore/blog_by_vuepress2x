@@ -95,3 +95,19 @@ setTimeout(() => {
 `watchEffect`+`flush`参数的使用方式在`vue3.2+`开始提供`watchPostEffect`函数来简化代替代码的书写，作用都是一样的！
 
 参考资料：[watchEffect](https://v3.cn.vuejs.org/api/computed-watch-api.html#watcheffect)、[副作用刷新时机](https://v3.cn.vuejs.org/guide/reactivity-computed-watchers.html#%E5%89%AF%E4%BD%9C%E7%94%A8%E5%88%B7%E6%96%B0%E6%97%B6%E6%9C%BA)
+
+## 插槽
+
+插槽在没有任何具名插槽的情况下，可以不明确写出 `default` 插槽名:
+
+```vue
+<template v-slot:default></template>
+```
+
+而在含有其他具名插槽的情况时，则需要明确写明使用，否则会无法正确渲染内容：
+
+```vue
+<template v-slot:header></template>
+<template v-slot:default></template>
+<template v-slot:footer></template>
+```
