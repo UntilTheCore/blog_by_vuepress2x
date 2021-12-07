@@ -45,7 +45,7 @@ export default {
 - `2.x` 版本：这个版本开始，`Vite` 官方把一些明确提供的特性进行了去除，但并非是真的去除了，而是把这些功能利用 `Plugin` 的形式实现，尽量最小化耦合！因此， `vueCustomBlockTransforms` 属性无法在 `2.x` 版本的 `vite.config.ts` 中得到配置。现在想要实现同样的效果需要自己编写一个插件来完成了！
 
 ::: tip
-接下来的内容需要你有一点Vite编写 [插件](https://cn.vitejs.dev/guide/api-plugin.html) 的知识，编写插件很简单，简单看一点文档内容即可上手。
+接下来的内容需要你有一点Vite编写 [插件](https://cn.vitejs.dev/guide/api-plugin.html) 的知识，编写插件很简单，简单看一点文档内容即可上手。另外，官方把这块的内容放在了 `v1.x` 的标题为[自定义块转换](https://cn.vitejs.dev/guide/migration.html#custom-blocks-transforms)里面
 :::
 
 ## 正式开始
