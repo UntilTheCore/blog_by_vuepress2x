@@ -8,6 +8,10 @@ const nav: NavbarGroup = {
       link: "/web/npm/",
     },
     {
+      text: "工程化",
+      link: "/web/engineering/",
+    },
+    {
       text: "Vue",
       children: [
         {
