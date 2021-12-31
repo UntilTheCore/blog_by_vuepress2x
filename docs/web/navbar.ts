@@ -4,8 +4,8 @@ const nav: NavbarGroup = {
   text: "前端",
   children: [
     {
-      text: "npm & yarn",
-      link: "/web/npm/",
+      text: "包管理器",
+      link: "/web/packagemanager/",
     },
     {
       text: "工程化",

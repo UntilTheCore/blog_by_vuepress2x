@@ -17,26 +17,44 @@ import nginxSideBar from "../server/nginx/sidebar";
 import cicdSideBar from "../ci&cd/sidebar";
 import crystalUiSideBar from "../project/crystal-ui/sideBar";
 import engineeringSideBar from "../web/engineering/sidebar";
+import packageManagerSideBar from "../web/packagemanager/sidebar";
 
-const sideBar: SidebarConfig = {
-  "/project/fingertipsBook(react)/": projectSideBar,
-  "/project/freedrawingbed/": freeDrawingBedSideBar,
+const webSideBar: SidebarConfig = {
+  "/web/engineering/": engineeringSideBar,
+  "/web/packagemanager/": packageManagerSideBar,
   "/web/vue/vuepress/": vuepressSideBar,
   "/web/vue/vue2/": vue2SideBar,
   "/web/vue/vue3/": vue3SideBar,
   "/web/react/mobx/": mobxSideBar,
   "/web/react/redux/": reduxSideBar,
-  "/c/c/": cSideBar,
-  "/c/cplus/": cplusSideBar,
-  "/others/": othersSideBar,
-  "/home/": homeSideBar,
   "/web/react/react/": reactSideBar,
   "/web/react/antd/": antdSideBar,
+};
+
+const _cSideBar: SidebarConfig = {
+  "/c/c/": cSideBar,
+  "/c/cplus/": cplusSideBar,
+};
+
+const serverSideBar: SidebarConfig = {
   "/server/serverless/leancloud/": leancloudSideBar,
   "/server/nginx/": nginxSideBar,
-  "/ci&cd/": cicdSideBar,
+};
+
+const _projectSideBar: SidebarConfig = {
   "/project/crystal-ui/": crystalUiSideBar,
-  "/web/engineering/": engineeringSideBar,
+  "/project/fingertipsBook(react)/": projectSideBar,
+  "/project/freedrawingbed/": freeDrawingBedSideBar,
+};
+
+const sideBar: SidebarConfig = {
+  "/home/": homeSideBar,
+  "/others/": othersSideBar,
+  ...webSideBar,
+  ..._cSideBar,
+  ...serverSideBar,
+  ..._projectSideBar,
+  "/ci&cd/": cicdSideBar,
 };
 
 export default sideBar;

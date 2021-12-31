@@ -1,8 +1,4 @@
----
-sidebar: auto
----
-
-# npm
+# npm & yarn
 
 npm 和 yarn 都是包管理工具。
 
