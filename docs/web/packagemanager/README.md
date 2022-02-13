@@ -126,3 +126,57 @@ npm i node-sass@npm:dart-sass
 ::::
 
 `npm` 的覆盖规则较多，有需要可以深入了解：[npm overrides](https://docs.npmjs.com/cli/v8/configuring-npm/package-json#overrides) 、[pnpm overrrides](https://pnpm.io/zh/package_json#pnpmoverrides)
+
+## 如何初始化项目
+
+初始化空包时，我们可以在一个空文件夹下使用 `npm init` 、`yarn init` 、`pnpm init` 来初始化一个包，经过一个提问式的流程后我们就得到了一个 `package.json` 文件。若不想走提问式流程，也可以加 `-y` 参数让脚本执行默认流程来创建。
+
+另一种方式是我们使用脚手架工具，例如 `create-react-app` ，此时使用相关命令为：
+
+::::code-group
+
+:::code-group-item npx
+
+```bash
+npx create-react-app my-react-app
+```
+
+:::
+
+:::code-group-item npm
+
+```bash
+npm init react-app my-react-app
+```
+
+:::
+
+:::code-group-item yarn
+
+```bash
+yarn create react-app my-react-app
+```
+
+:::
+
+:::code-group-item pnpm
+
+```bash
+pnpm create create-app my-react-app
+```
+
+:::
+
+::::
+
+本身包名叫 `create-react-app` ，但是为了减少手动执行安装 `yarn add create-react-app` 然后再执行 `npx create-react-app` 这个步骤，就约定若一个包用于初始化项目的操作，那么就用 `creact` 作为包名的开头部分！这样，这些包管理器就知道该如何使用包并创建项目了！
+
+另一个约定是这些工具项目需要在 `package.json -> bin` 配置选项中设置正确的进本执行路径，包管理工具正是找到 `bin` 对应的脚本来完成创建过程的！
+
+### 作用域包的包名如何创建和使用
+
+|包管理器|包名|如何初始化|
+|-|-|-|
+|npm|@foo/create-bar|npm init @foo/bar|
+|yarn|@foo/create-bar|yarn create @foo/bar|
+|pnpm|@foo/create-bar|pnpm create @foo/bar|
