@@ -117,3 +117,10 @@ export default function (): Plugin {
 - code 中的内容是不包含`<demo></demo>`的，只含有块里面的内容;
 - 返回的内容若包含有变量，变量类型不论是字符串还是对象，都最好将其`JSON序列化`，在源码提取器中，提取的源码中既含有单引号字符、也含有双引号字符，因此会因为引号匹配的问题从而导致导出后的解析出错，对象同理；
 - `baseParse` 是 `Vue` 核心中进行源码解析的方法，里面涉及的知识包含编译原理，这些不在本文的讨论范围，在这里我们了解到它可以将 `.vue` 文件按 `块` 进行解析并得到相关源码即可；
+
+**官方资料**
+
+- [Vue3自定义块集成](https://v3.cn.vuejs.org/api/sfc-tooling.html#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9D%97%E9%9B%86%E6%88%90)
+- [Example for transforming custom blocks](https://github.com/vitejs/vite/tree/main/packages/plugin-vue#example-for-transforming-custom-blocks)
+- [Vue3自定义块](https://v3.cn.vuejs.org/api/sfc-spec.html#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9D%97)
+- [Vue-loader custom blocks](https://vue-loader.vuejs.org/guide/custom-blocks.html#custom-blocks)
