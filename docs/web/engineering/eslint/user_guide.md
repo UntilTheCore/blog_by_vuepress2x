@@ -1,4 +1,4 @@
-# 如何使用ESlint
+# 「轻松搞懂」ESLint
 
 ## 1. 安装
 
@@ -144,3 +144,91 @@ module.exports = {
 ![eslint_overrides.png](https://s2.loli.net/2022/04/26/BCPErLH4ukpgwzY.png)
 
 观察代码和图，`overrides` 会额外对 `bin` 和 `lib` 这两个目录使用新的 `rules` 进行 `lint` ，且会排除名为 `*.test.js` 的文件。
+
+## 6.不太常用的配置项
+
+### extends
+
+[extends](https://eslint.org/docs/user-guide/configuring/configuration-files#extending-configuration-files)：这是一个继承属性，可以继承另外一个配置文件的 **所有** 属性（注意：是所有）。它的配置值可以是一个单字符串，也可以是一个字符串数组，如果是一个字符串数组，那么数组后面的配置会 **扩展** 前一个的配置。等于最终是以最后一个配置文件为准。
+
+需要注意的是，这些扩展配置有一个潜在的规则：
+
+1. **规则合并：** 如果后一个配置只是对前一个规则的严重程度进行了更多，那么就触发规则合并：
+
+```text
+前一个:    "eqeqeq": ["error", "allow-null"]
+当前:      "eqeqeq": "warn"
+最终结果:   "eqeqeq": ["warn", "allow-null"]
+```
+
+2.**规则覆盖：** 如果后一个配置既更改了严重程度，又更改了规则，那么就触发覆盖：
+
+```text
+前一个:     "quotes": ["error", "single", "avoid-escape"]
+当前:       "quotes": ["error", "single"]
+最终结果:    "quotes": ["error", "single"]
+```
+
+一些特殊规则是一个对象值，那就把新对象内属性覆盖上一个对象，并把没有配置到的属性值置位默认值：
+
+```text
+前一个:   "max-lines": ["error", { "max": 200, "skipBlankLines": true, "skipComments": true }]
+当前:     "max-lines": ["error", { "max": 100 }]
+最终结果:  "max-lines": ["error", { "max": 200, "skipBlankLines": false, "skipComments": false }]
+```
+
+#### extends文件引入的规则
+
+为了简化书写，可以在填写 `extends` 内配置文件时忽略 `eslint-config-` 前缀。比如：
+
+```js
+ extends: ["eslint-config-standard"]
+ //可以简化为 
+ extends: ["standard"]
+```
+
+对于 `scope` 包，也是同理，只不过是忽略 `/` 后的 `eslint-config-` 前缀：
+
+```js
+ extends: ["@vue/eslint-config-prettier"]
+ //可以简化为 
+ extends: ["@vue/prettier"]
+```
+
+### plugins
+
+ESLint 中的插件是为了增强其功能的存在。官方只提供了对 `.js` 文件的 `lint` 能力，而对于其他文件无能为力。比如 `.vue` 、`.jsx` 等文件，这些文件的检测能力，都是靠这些应用技术的官方提供的。
+
+对于大多数开发者，基本不会去编写这方面的插件，除非要自己定义一种文件格式！通常来说，我们只要会 **引入** 插件，会 **使用** 插件提供的配置，会 **覆盖** 插件中的具体配置项即可！此时我们就需要前往提供插件的官方文档去查看如何使用相关配置了，比如 [eslint-plugin-vue](https://eslint.vuejs.org/user-guide/#installation) 的 `ESLint` 配置官方文档。
+
+关于 `plugins` 内还有一些更为高级的配置项，属于小众的配置，这里就不再展开介绍了，有兴趣可以看我的这篇文章[《ESlint进阶配置指南》](/web/engineering/eslint/eslint_advanced.md)。
+
+#### plugins文件引入的规则
+
+为了简化书写，可以在填写 `plugins` 内配置文件时忽略 `eslint-plugins-` 前缀。比如：
+
+```js
+ plugins: ["eslint-plugins-vue"]
+ //可以简化为 
+ plugins: ["vue"]
+```
+
+对于 `scope` 包，也是同理，只不过是忽略 `/` 后的 `eslint-plugins-` 前缀（这种方式很少见）：
+
+```js
+ plugins: ["@vue/eslint-plugins-vue"]
+ //可以简化为 
+ plugins: ["@vue/vue"]
+```
+
+[命名约定参考](https://eslint.org/docs/user-guide/configuring/plugins#naming-convention)
+
+## 总结
+
+1. `extends` 和 `plugins` 若使用第三方的包，则必须先进行安装；
+2. `extends` 和 `plugins` 的作用都是为了更好地配置项目。`extends` 主要作用就是进行配置合并（或覆盖），而 `plugins` 除了提供一些配置外还可以增强文件文件的解析，用来处理 `ESLint` 所无法识别的文件，比如 `.vue` 、`.jsx` 、`.ts` 、`.tsx` 文件。
+3. 配置文件配置的最终应用路线： overrides > rules > extends；
+
+## 注意
+
+1. 当一个项目中有多个 `eslintrc.js` 或 `eslintrc.json` 时，子目录中的 `eslintrc.js` 若不配置 `root:true` 的话，它会被配置了此项属性的文件或是最终找到的顶层 `eslintrc.js` 文件中的配置所覆盖。因此若想每个文件都可以得到正确应用，则需给配置文件配置 `root: true` 属性；
