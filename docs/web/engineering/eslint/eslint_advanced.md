@@ -102,4 +102,4 @@ configs: {
 
 `parserOptions` 解析配置，是用于 `parser` 解析时使用的，通常它俩都一起出现。本身 `parserOptions` 的内容是提供给 `ESLint -> Espree` 解析器的，但是一旦我们指定了额外的 `parser` 属性，那么 `parserOptions` 会先传给自定义的 `parser`，然后自定义 `parser` 处理后再传给 `Espree` 。
 
-[使用自定义解析器](https://eslint.org/docs/developer-guide/working-with-custom-parsers)、[指定解析器](https://eslint.org/docs/user-guide/configuring/plugins#specifying-parser)
+[使用自定义解析器](https://eslint.org/docs/developer-guide/working-with-custom-parsers)、[指定解析器](https://eslint.org/docs/user-guide/configuring/plugins#specifying-parser)、[ESLint 的 parser 是个什么东西](https://zhuanlan.zhihu.com/p/295291463)
