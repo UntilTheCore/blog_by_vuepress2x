@@ -11,6 +11,7 @@ const sideBar: SidebarConfigArray = [
         link: "/web/engineering/eslint/",
         children: [
           "/web/engineering/eslint/user_guide.md",
+          "/web/engineering/eslint/eslint_advanced.md",
         ]
       }
     ],
