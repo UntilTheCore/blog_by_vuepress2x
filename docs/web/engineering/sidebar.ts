@@ -12,6 +12,7 @@ const sideBar: SidebarConfigArray = [
         children: [
           "/web/engineering/eslint/user_guide.md",
           "/web/engineering/eslint/eslint_advanced.md",
+          "/web/engineering/eslint/create_config_extension_package.md",
         ]
       }
     ],
